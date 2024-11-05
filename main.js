@@ -91,7 +91,9 @@ const hang = document.getElementById("Hang")
 const st = document.getElementById("1st")
 const end = document.getElementById("end")
 const h1End = document.getElementById("h1End")
+const score= document.getElementById("score")
 let r1 = 0
+let r2 = 0
 let n1 = 0
 let  Q1 =  Q
 let A1 = alphabet
@@ -104,9 +106,19 @@ let A1 = alphabet
     rulebutton.remove()
     wel.innerText = ""
     clue.innerHTML = ""
+    score.innerHTML = ""
         alpha.innerHTML = ""
         imgMain.innerHTML = ""
         Alpha.innerHTML = ""
+        const score1 = document.createElement("p")
+        const timer = document.createElement("p")
+        score1.id = "score1"
+        timer.id = "score1"
+        score.append(score1, timer)
+        console.log(r2);
+        
+        score1.innerHTML = "Score: " + r2
+        timer.innerHTML = "timer:"
         const retry = document.createElement("button")
         const home = document.createElement("button")
         nd.append(retry, home)
@@ -136,6 +148,7 @@ w = document.createElement("p")
     Alpha.append(w)
     w.innerText = element
     w.id = "uni"
+    w.classList.add(element)
     w.addEventListener("click", (e)=>{
       let t;
          Q1[q].name.forEach ((element1,i) => {
@@ -146,7 +159,10 @@ w = document.createElement("p")
           g.innerHTML = element1.toUpperCase()
           g.id = "dev1"
           i1.src = "New folder/T.png"
-          e.target.innerText = ""
+          e.target.style.color = "#78cdf5"
+          e.target.style.textShadow = "none"
+          i1.style.position = "relative"
+          i1.style.bottom = "30px"
           i1.id = "img2"
         // Alpha.replaceChild(i1, Alpha.children[i2])
         e.target.append(i1)
@@ -159,6 +175,7 @@ w = document.createElement("p")
       {
         i1.src = "New folder/F.png"
         i1.id = "img2"
+        i1.style.bottom = "0px"
       //   Alpha.children[i2]
       // Alpha.replaceChild(i1, Alpha.children[i2])
       e.target.innerText = ""
@@ -173,12 +190,13 @@ w = document.createElement("p")
         alpha.innerHTML = ""
         imgMain.innerHTML = ""
         Alpha.innerHTML = ""
-        
+        score.innerHTML = ""
         h1End.innerText = "u loose"
         end.append(h1End)
       }
       if (r1 ===  Q1[q].name.length) {
         r1 = 0
+        r2 = r2 + 1
         clue.innerHTML = ""
         alpha.innerHTML = ""
         imgMain.innerHTML = ""
@@ -190,10 +208,9 @@ w = document.createElement("p")
         h1End.innerText = "u completd this level"
         next.addEventListener("click",start)
         Q1 = Q1.filter((e,i) => {
-          console.log(Q1[q].id, e.id);
-          
           return Q1[q].id !== e.id
         });
+        console.log(r2);
         
         
       }
@@ -204,12 +221,14 @@ retry.addEventListener("click", () => {
 Q1 = Q
 n1 = 0 
 r1 = 0
+r2 = 0
 start()
 })
 home.addEventListener("click", Welcome)
   }
 
 const Welcome = () => {
+  r2 = 0
   r1 = 0
   n1 = 0
   nd.innerHTML = ""
@@ -219,6 +238,7 @@ const Welcome = () => {
     alpha.innerHTML = ""
     imgMain.innerHTML = ""
     Alpha.innerHTML = ""
+    score.innerHTML = ""
     st.append(start1, rulebutton)
 const Wh1 = document.createElement("h1")
 const Wp1 = document.createElement("p")
