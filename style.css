@@ -133,4 +133,8 @@ font-weight:lighter;
 #score1
 {
     font-size: 30px;
+    display: grid;
+}
+#h1End{
+    font-size:50px
 }

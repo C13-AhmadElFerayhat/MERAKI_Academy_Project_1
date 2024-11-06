@@ -14,7 +14,6 @@ const alphabet = [
         id: 1,
         c: "Animals",
         name: ["z","e","b","r","a"],
-        // name1: "cat",
         r: 4
     },
     {
@@ -51,7 +50,7 @@ const alphabet = [
       r: 3
   },{
       id: 8,
-      c: "cars",
+      c: "Cars",
       name: ["h","o","n","d","a"],
       r: 3
   },{
@@ -92,10 +91,11 @@ const st = document.getElementById("1st")
 const end = document.getElementById("end")
 const h1End = document.getElementById("h1End")
 const score= document.getElementById("score")
+let timer1;
 let r1 = 0
 let r2 = 0
 let n1 = 0
-let  Q1 =  Q
+let Q1 = Q
 let A1 = alphabet
   const start = () =>{
     h1End.innerHTML = ""
@@ -111,14 +111,31 @@ let A1 = alphabet
         imgMain.innerHTML = ""
         Alpha.innerHTML = ""
         const score1 = document.createElement("p")
-        const timer = document.createElement("p")
-        score1.id = "score1"
-        timer.id = "score1"
-        score.append(score1, timer)
-        console.log(r2);
-        
+        // const timer = document.createElement("dev")
+        // const ttt = document.createElement("span")
+        // const sss = document.createElement("span")
+        // const span1 = document.createElement("span")
+        // const span2 = document.createElement("span")
+        // const span3 = document.createElement("span")
+        // const span4 = document.createElement("span")
+        // const span5 = document.createElement("span")
+        // span1.id="min"
+        // span2.id="sec"
+        // span3.id="count"
+        // score1.id = "score1"
+        // timer.id = "score1"
+        // span1.innerHTML = " 00 "
+        // span2.innerHTML = " 00 "
+        // span3.innerHTML = " 00 "
+        // span4.innerHTML = " : "
+        // span5.innerHTML = " : "
+        score.append(score1)
         score1.innerHTML = "Score: " + r2
-        timer.innerHTML = "timer:"
+        // ttt.innerHTML = "timer: "
+        // sss.append(span1,span4,span2,span5,span3)
+        // timer.append(ttt,sss)
+        // timer1 = true
+        // stopWatch();
         const retry = document.createElement("button")
         const home = document.createElement("button")
         nd.append(retry, home)
@@ -164,20 +181,16 @@ w = document.createElement("p")
           i1.style.position = "relative"
           i1.style.bottom = "30px"
           i1.id = "img2"
-        // Alpha.replaceChild(i1, Alpha.children[i2])
         e.target.append(i1)
         t = 1
         r1 = r1 + 1
         }
     })
-    // e.target.innerText = ""
     if(t === undefined)
       {
         i1.src = "New folder/F.png"
         i1.id = "img2"
         i1.style.bottom = "0px"
-      //   Alpha.children[i2]
-      // Alpha.replaceChild(i1, Alpha.children[i2])
       e.target.innerText = ""
       e.target.append(i1)
       n1 = n1 + 1
@@ -186,13 +199,26 @@ w = document.createElement("p")
         firstIm.src = images[n1].src
         imgMain.append(firstIm)
       }else{
+        timer1 = false;
+        clearTimeout(stopWatch)
+        minute = 0;
+        second = 0;
+        count = 0;
+        // document.getElementById('min').innerHTML = "00";
+        // document.getElementById('sec').innerHTML = "00";
+        // document.getElementById('count').innerHTML = "00";
         clue.innerHTML = ""
         alpha.innerHTML = ""
         imgMain.innerHTML = ""
         Alpha.innerHTML = ""
         score.innerHTML = ""
-        h1End.innerText = "u loose"
-        end.append(h1End)
+        end.innerHTML =""
+        const p30 = document.createElement("p")
+        const p31 = document.createElement("p")
+        p30.innerText = "to start the game from the beginning press Retry"
+        p31.innerText = "to back to the home press HOME"
+        h1End.innerText = "u loose :("
+        end.append(h1End,p30,p31)
       }
       if (r1 ===  Q1[q].name.length) {
         r1 = 0
@@ -201,6 +227,7 @@ w = document.createElement("p")
         alpha.innerHTML = ""
         imgMain.innerHTML = ""
         Alpha.innerHTML = ""
+        end.innerHTML =""
         const h1End = document.createElement("h1")
         const next = document.createElement("button")
         end.append(h1End, next)
@@ -218,6 +245,13 @@ w = document.createElement("p")
 })
 
 retry.addEventListener("click", () => {
+timer1 = 0
+        minute = 0;
+        second = 0;
+        count = 0;
+//         document.getElementById('min').innerHTML = "00";
+//         document.getElementById('sec').innerHTML = "00";
+//  document.getElementById('count').innerHTML = "00";
 Q1 = Q
 n1 = 0 
 r1 = 0
@@ -225,9 +259,16 @@ r2 = 0
 start()
 })
 home.addEventListener("click", Welcome)
-  }
+}
 
 const Welcome = () => {
+  clearTimeout(stopWatch)
+        minute = 0;
+        second = 0;
+        count = 0;
+        // document.getElementById('min').innerHTML = "00";
+        // document.getElementById('sec').innerHTML = "00";
+        // document.getElementById('count').innerHTML = "00";
   r2 = 0
   r1 = 0
   n1 = 0
@@ -239,6 +280,7 @@ const Welcome = () => {
     imgMain.innerHTML = ""
     Alpha.innerHTML = ""
     score.innerHTML = ""
+    end.innerHTML =""
     st.append(start1, rulebutton)
 const Wh1 = document.createElement("h1")
 const Wp1 = document.createElement("p")
@@ -270,6 +312,49 @@ pw.innerText = "The goal is to guess the hidden word or phrase by suggesting let
 hl.innerText = "Losing:"
 pl.innerText = "The goal is to guess the hidden word or phrase by suggesting letters, one at a time, before a drawing of a stick figure (the hangman) is completd"
   }
+  let hour = 0;
+let minute = 0;
+let second = 0;
+let count = 0;
+
+function stopWatch() {
+  if (timer1) {
+      count++;
+
+      if (count == 100) {
+          second++;
+          count = 0;
+      }
+
+      if (second == 60) {
+          minute++;
+          second = 0;
+      }
+
+      let minString = minute;
+      let secString = second;
+      let countString = count;
+
+      if (minute < 10) {
+          minString = "0" + minString;
+      }
+
+      if (second < 10) {
+          secString = "0" + secString;
+      }
+
+      if (count < 10) {
+          countString = "0" + countString;
+      }
+
+      document.getElementById('min').innerHTML = minString;
+      document.getElementById('sec').innerHTML = secString;
+      document.getElementById('count').innerHTML = countString;
+      setTimeout(stopWatch, 6.5);
+  }
+  
+}
+
 
   start1.addEventListener("click", start)
   rulebutton.addEventListener("click", rules)
